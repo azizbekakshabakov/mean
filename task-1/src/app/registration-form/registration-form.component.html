@@ -1,0 +1,27 @@
+<form (submit)="onSubmit()">
+  <label for="name">Name: </label>
+  <input [(ngModel)]="user.userName" type="text" id="name" name="name" required>
+  <p>{{userNameError}}</p>
+
+  <label for="email">Email: </label>
+  <input [(ngModel)]="user.userEmail" type="email" id="email" name="email" required>
+  <p>{{userEmailError}}</p>
+
+  <label for="password">Password: </label>
+  <input [(ngModel)]="user.userPassword" type="password" id="password" name="password" required>
+  <p>{{userPasswordError}}</p>
+
+  <label for="gender">Gender: </label>
+  <input [(ngModel)]="user.userGender" type="radio" id="contactChoice1" name="gender" value="male" class="ms-3"/>
+  <label for="contactChoice1">Male</label>
+
+  <input [(ngModel)]="user.userGender" type="radio" id="contactChoice2" name="gender" value="female" class="ms-3"/>
+  <label for="contactChoice2">Female</label>
+  <p>{{userGenderError}}</p>
+
+  <label for="birthday">Birthday:</label>
+  <input [(ngModel)]="user.userBirthday" type="date" id="birthday" name="birthday"> 
+  <p>{{userBirthdayError}}</p>
+
+  <button (click)="addNewItem(user)" type="submit" class="btn btn-primary">Send</button>
+</form>

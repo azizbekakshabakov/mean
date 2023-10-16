@@ -1,0 +1,9 @@
+<app-registration-form (newItemEvent)="onChanged($event)"></app-registration-form>
+
+<ul *ngFor="let item of itemArray;let indexOfelement=index;" class="list-group mt-3">
+  <li class="list-group-item">Username: {{item.userName}}</li>
+  <li class="list-group-item">Email: {{item.userEmail}}</li>
+  <li class="list-group-item">Password: {{item.userPassword}}</li>
+  <li class="list-group-item">Gender: {{item.userGender}}</li>
+  <li class="list-group-item">Birthday: {{item.userBirthday}}</li>
+</ul>

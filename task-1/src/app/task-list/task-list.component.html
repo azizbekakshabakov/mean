@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="container">
+  
+<div class="text-center mt-5"><h1>To do list</h1></div>
+
+<ul class="list-group">
+  <li *ngFor="let item of items;let indexOfelement=index;" class="list-group-item">
+    <span (click)="doneItem(indexOfelement)" *ngIf="item.done==true" class="text-decoration-line-through">{{item.description}}</span>
+    <span (click)="doneItem(indexOfelement)" *ngIf="item.done==false">{{item.description}}</span>
+    <button (click)="deleteItem(indexOfelement)" class="btn btn-danger">Delete</button>
+  </li>
+</ul>
+
+<input
+  #newItem
+  placeholder="add an item"
+  (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+  class="lg-text-input m-3"
+  id="addItemInput" />
+
+<button class="btn btn-primary" (click)="addItem(newItem.value)">Add</button>
+
+</body>
+</html>
