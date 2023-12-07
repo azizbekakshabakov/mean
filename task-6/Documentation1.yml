@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Task 6 API
+  description: Documentation for class work and homework
+  contact:
+    name: Azizbek Akshabakov
+    url: https://youtube.com/@azizbek
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000/
+paths:
+  /one:
+    get:
+      description: Отправлять текст на GET-запрос
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            text/html:
+              example: Hello visitor
+  /two:
+    get:
+      description: Возвращает JSON с данными о студенте на GET-запрос
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: Cole Yeagher
+                  age:
+                    type: integer
+                    example: 28
+                  city:
+                    type: string
+                    example: Washington DC
+  /three:
+    description: Совершает 10-кратную итерацию имени присланного
+    get:
+      parameters:
+        - in: query
+          name: name
+          required: true
+          schema:
+            type: string
+            example: John
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: John John John John John John John John John John
+  /four:
+    description: Сохранить данные, переданные через POST-запрос
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Восьмая симфония
+                author:
+                  type: string
+                  example: Чайковский
+                year:
+                  type: integer
+                  example: 1865
+      responses:
+        201:
+          description: Песня успешно добавлена
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    example: "{name: symphony no 8, author: Chaykov, year: 1875}"
+                  message:
+                    type: string
+                    example: "Песня создана"
+  /five:
+    description: Подключиться ко стороннему ресурсу и требовать авторизации
+    get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: latitude
+          required: true
+          schema:
+            type: number
+            example: 51.67
+        - in: query
+          name: longitude
+          required: true
+          schema:
+            type: number
+            example: 20.39
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      latitude:
+                        type: string
+                        example: 51.23
+                      longitude:
+                        type: string
+                        example: 34.92
+                      daily:
+                        type: number
+                        example: [-0.6, 0.5, 0.4, 0.2, 2.6, 6.5, 9.7]
+        403:
+          description: "You do not have necessary permissions for the resource"
+  /repos/{repoName}:
+    description: Позволяет редактировать репозиторий
+    get:
+      parameters:
+        - in: path
+          name: repoName
+          required: true
+          schema:
+            type: string
+            example: django-rest
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            text/html:
+              example: <html>Два поля с именем и описанием репозитория и кнопка конфирм</html>
+  /register:
+    description: Создат репозиторий
+    get:
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            text/html:
+              example: <html>Два поля для создания репозитория</html>
+  /repos:
+    description: Листинг реозиторий
+    get:
+      responses:
+        200:
+          description: Удачный ответ
+          content:
+            text/html:
+              example: <html>Список и кнопки с ссылкой, удалением, изменением</html>
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
